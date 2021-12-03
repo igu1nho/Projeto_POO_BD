@@ -37,7 +37,7 @@ public class Status_jogDAO extends ConnectionDAO {
 
     public boolean atualizarStatus(int id, Status_jog status) {
         connectToDB();
-        String sql = "UPDATE status SET kills=?, deaths=?, horas_p_dia=? where id=?";
+        String sql = "UPDATE Status_jog SET kills=?, deaths=?, horas_p_dia=? where idstatus_jog=?";
 
         try {
             pst = con.prepareStatement(sql);
@@ -64,7 +64,7 @@ public class Status_jogDAO extends ConnectionDAO {
 
     public boolean deletarStatus(int id) {
         connectToDB();
-        String sql = "DELETE FROM status where id=?";
+        String sql = "DELETE FROM status_jog where idstatus_jog=?";
 
         try {
             pst = con.prepareStatement(sql);
