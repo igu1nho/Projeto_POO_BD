@@ -12,12 +12,14 @@ public class JogadorDAO extends ConnectionDAO {
 
     public boolean inserirJogador(Jogador jogador) {
         connectToDB();
-        String sql = "INSERT INTO Jogador (nick_apelido, funcao) values(?,?)";
+        String sql = "INSERT INTO Jogador (nick_apelido, funcao, Org_idOrg, Status_jog_idStatus_jog) values(?,?,?,?)";
 
         try {
             pst = con.prepareStatement(sql);
             pst.setString(1, jogador.nick_apelido);
             pst.setString(2, jogador.funcao);
+            pst.setInt(3, jogador.Org_idOrg);
+            pst.setInt(4, jogador.Status_jog_idStatus_jog);
             pst.execute();
             sucesso = true;
         } catch(SQLException exc) {
@@ -37,7 +39,7 @@ public class JogadorDAO extends ConnectionDAO {
 
     public boolean atualizarJogador(int id, Jogador jogador) {
         connectToDB();
-        String sql = "UPDATE instrumento SET nick_apelido=?, funcao=? where id=?";
+        String sql = "UPDATE jogador SET nick_apelido=?, funcao=? where idJogador=?";
 
         try {
             pst = con.prepareStatement(sql);
@@ -63,7 +65,7 @@ public class JogadorDAO extends ConnectionDAO {
 
     public boolean deletarJogador(int id) {
         connectToDB();
-        String sql = "DELETE FROM jogador where id=?";
+        String sql = "DELETE FROM jogador where idJogador=?";
 
         try {
             pst = con.prepareStatement(sql);
