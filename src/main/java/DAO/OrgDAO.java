@@ -1,7 +1,6 @@
 package DAO;
 
 import Classes.Org;
-import Classes.Status_jog;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class OrgDAO extends ConnectionDAO{
 
     public boolean atualizarOrg(int id, Org org) {
         connectToDB();
-        String sql = "UPDATE org SET nome=?, membros_time=? where id=?";
+        String sql = "UPDATE Org SET nome=?, membros_time=? where idOrg=?";
 
         try {
             pst = con.prepareStatement(sql);
@@ -63,7 +62,7 @@ public class OrgDAO extends ConnectionDAO{
 
     public boolean deletarOrg(int id) {
         connectToDB();
-        String sql = "DELETE FROM org where id=?";
+        String sql = "DELETE FROM Org where idOrg=?";
 
         try {
             pst = con.prepareStatement(sql);
