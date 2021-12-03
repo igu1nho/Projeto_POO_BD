@@ -19,12 +19,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         CampeonatoDAO c1 = new CampeonatoDAO();
         Campeonato c2 = new Campeonato();
-        JogadorDAO j1[] = new JogadorDAO[5];
-        Jogador[] j2 = new Jogador[5];
+        JogadorDAO j1 = new JogadorDAO();
+        Jogador j2 = new Jogador();
         OrgDAO o1 = new OrgDAO();
         Org o2 = new Org();
-        Status_jogDAO s1[] = new Status_jogDAO[5];
-        Status_jog s2[] = new Status_jog[5];
+        Status_jogDAO s1 = new Status_jogDAO();
+        Status_jog s2 = new Status_jog();
         int cont = 0; //contador de times inscritos
         int id; //id que representa a identificacao de alguma das classes
 
@@ -33,12 +33,12 @@ public class Main {
         while (flag) {
             System.out.println("Escolha uma opção");
             System.out.println("1 - Inserir os dados do times:");
-            System.out.println("2 - Inserir os dados dos jogadores:");
-            System.out.println("3 - Inserir os dados dos status dos jogadores:");
+            System.out.println("2 - Inserir os dados dos status dos jogadores:");
+            System.out.println("3 - Inserir os dados dos jogadores:");
             System.out.println("4 - Inserir os dados do campeonato:");
             System.out.println("5 - Atualizar os dados do time :");
-            System.out.println("6 - Atualizar os dados dos jogadores:");
-            System.out.println("7 - Atualizar os dados dos status do jogadores:");
+            System.out.println("6 - Atualizar os dados dos status do jogador:");
+            System.out.println("7 - Atualizar os dados dos jogador:");
             System.out.println("8 - Atualizar os dados do campeonato:");
             System.out.println("9 - Deletar algum time:");
             System.out.println("10 - Deletar algum jogador:");
@@ -58,111 +58,114 @@ public class Main {
                     sc.nextLine();
                     System.out.println("Digite o nome do Time(Organizacao): ");
                     o2.nome = sc.nextLine();
+                    cont++;
                     System.out.println("Digite a quantidade de membros do time");
                     o2.membros_time = sc.nextInt();
                     o1.inserirOrg(o2);
                     break;
 
                 case 2:
-                    for (int i = 0; i < 7; i++) {
-                        System.out.println("Digite o nome do jogador: ");
-                        if (j2[i] != null) {
-                            j2[i].nick_apelido = sc.nextLine();
-                        System.out.println("Digite a funcao do jogador: ");
-                            j2[i].funcao = sc.nextLine();
-                        }
-                        j1[i].inserirJogador(j2[i]);
-                    }
+                    System.out.println("Digite a quantidade de kills do jogador: ");
+                    s2.kills = sc.nextInt();
+                    System.out.println("Digite a quantidade de deaths do player: ");
+                    s2.deaths = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Digite a quantidade de horas treinadas para o campeonato: ");
+                    s2.horas_p_dia = sc.nextLine();
+                    s1.inserirStatus(s2);
                     break;
 
                 case 3:
-                    for (int i = 0; i < 7; i++) {
-                        System.out.println("Digite a quantidade de kills do jogador: ");
-                        if (s2[i] != null) {
-                            s2[i].kills = sc.nextInt();
-                        }
-                        System.out.println("Digite a quantidade de deaths do player: ");
-                        if (s2[i] != null) {
-                            s2[i].deaths = sc.nextInt();
-                        }
-                        System.out.println("Digite a quantidade de horas treinadas para o campeonato: ");
-                        if (s2[i] != null) {
-                            s2[i].horas_p_dia = sc.nextLine();
-                        }
-                        s1[i].inserirStatus(s2[i]);
-                    }
+                        sc.nextLine();
+                        System.out.println("Digite o nome do jogador: ");
+                        j2.nick_apelido = sc.nextLine();
+                        System.out.println("Digite a funcao do jogador: ");
+                        j2.funcao = sc.nextLine();
+                        System.out.println("Digite a id da Org: ");
+                        j2.Org_idOrg = sc.nextInt();
+                        System.out.println("Digite a id do Status: ");
+                        j2.Status_jog_idStatus_jog = sc.nextInt();
+                        j1.inserirJogador(j2);
                     break;
+
 
                 case 4:
                     System.out.println("Digite o valor da premiação total do campeonato: ");
                     c2.premiacao = sc.nextDouble();
                     System.out.println("Quantidade de times inscritos até o momento: " + cont);
                     c2.times_inscritos = cont;
+                    sc.nextLine();
                     System.out.println("Digite a data que começa o campeonato: ");
                     c2.data = sc.nextLine();
                     c1.inserirCampeonato(c2);
                     break;
 
                 case 5:
-                    System.out.println("Entre com o id do time que deseja alterar");
+                    System.out.println("Entre com o id do time que deseja alterar: ");
                     id = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Entre com o novo nome do time que deseja alterar: ");
+                    o2.nome = sc.nextLine();
+                    System.out.println("Entre com o nova quantidade de membros no time que deseja alterar: ");
+                    o2.membros_time = sc.nextInt();
                     o1.atualizarOrg(id, o2);
                     break;
 
                 case 6:
-                    System.out.println("Entre com o id do jogador que deseja alterar");
+                    System.out.println("Entre com o id do status que deseja alterar: ");
                     id = sc.nextInt();
-                    for (int i = 0; i < 7; i++) {
-                        if (j2[i] != null) {
-                            j1[i].atualizarJogador(id, j2[i]);
-                        }
-                    }
+                    System.out.println("Entre com o nova quantidade de kills: ");
+                    s2.kills = sc.nextInt();
+                    System.out.println("Entre com o nova quantidade de deaths: ");
+                    s2.deaths = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Entre com o nova quantidade de horas treinadas: ");
+                    s2.horas_p_dia = sc.nextLine();
+                    s1.atualizarStatus(id, s2);
                     break;
 
                 case 7:
-                    System.out.println("Entre com o id do status que deseja alterar");
+                    System.out.println("Entre com o id do jogador que deseja alterar: ");
                     id = sc.nextInt();
-                    for (int i = 0; i < 7; i++) {
-                        if (s2[i] != null) {
-                            s1[i].atualizarStatus(id, s2[i]);
-                        }
-                    }
+                    sc.nextLine();
+                    System.out.println("Entre com o novo nick do jogador: ");
+                    j2.nick_apelido = sc.nextLine();
+                    System.out.println("Entre com o nova funcao do jogador deseja alterar: ");
+                    j2.funcao = sc.nextLine();
+                    j1.atualizarJogador(id, j2);
                     break;
 
                 case 8:
-                    System.out.println("Entre com o id do campeonato que deseja alterar");
+                    System.out.println("Entre com o id do campeonato que deseja alterar: ");
                     id = sc.nextInt();
+                    System.out.println("Entre com o novo valor da premiacao: ");
+                    c2.premiacao = sc.nextDouble();
+                    sc.nextLine();
+                    System.out.println("Entre com a nova data do campeonato: ");
+                    c2.data = sc.nextLine();
                     c1.atualizarCampeonato(id, c2);
                     break;
 
                 case 9:
-                    System.out.println("Entre com o id do time que deseja deletar");
+                    System.out.println("Entre com o id do time que deseja deletar: ");
                     id = sc.nextInt();
                     o1.deletarOrg(id);
                     break;
 
                 case 10:
-                    System.out.println("Entre com o id do jogador que deseja deletar");
+                    System.out.println("Entre com o id do jogador que deseja deletar: ");
                     id = sc.nextInt();
-                    for (int i = 0; i < 7; i++) {
-                        if (j2[i] != null) {
-                            j1[i].deletarJogador(id);
-                        }
-                    }
+                    j1.deletarJogador(id);
                     break;
 
                 case 11:
-                    System.out.println("Entre com o id do status que deseja deletar");
+                    System.out.println("Entre com o id do status que deseja deletar: ");
                     id = sc.nextInt();
-                    for (int i = 0; i < 7; i++) {
-                        if (s2[i] != null) {
-                            s1[i].deletarStatus(id);
-                        }
-                    }
+                    s1.deletarStatus(id);
                     break;
 
                 case 12:
-                    System.out.println("Entre com o id do campeonato que deseja deletar");
+                    System.out.println("Entre com o id do campeonato que deseja deletar: ");
                     id = sc.nextInt();
                     c1.deletarCampeonato(id);
                     break;
@@ -180,35 +183,27 @@ public class Main {
                     break;
 
                 case 14:
-                    for (int i = 0; i < 7; i++) {
-                        if (j2[i] != null) {
-                            ArrayList<Jogador> player = new ArrayList<>();
-                            player = j1[i].buscarJogador();
+                    ArrayList<Jogador> player = new ArrayList<>();
+                    player = j1.buscarJogador();
 
-                            System.out.println("=====================");
-                            System.out.println("ArrayList na main ===");
-                            for (int k = 0; k < player.size(); k++) {
-                                System.out.println("nick do jogador: " + player.get(k).nick_apelido);
-                                System.out.println("funcao do jogador: " + player.get(k).funcao);
-                            }
-                        }
+                    System.out.println("=====================");
+                    System.out.println("ArrayList na main ===");
+                    for (int k = 0; k < player.size(); k++) {
+                        System.out.println("nick do jogador: " + player.get(k).nick_apelido);
+                        System.out.println("funcao do jogador: " + player.get(k).funcao);
                     }
                     break;
 
                 case 15:
-                    for (int i = 0; i < 7; i++) {
-                        if (s2[i] != null) {
-                            ArrayList<Status_jog> status = new ArrayList<>();
-                            status = s1[i].buscarStatus();
+                    ArrayList<Status_jog> status_jog = new ArrayList<>();
+                    status_jog = s1.buscarStatus();
 
-                            System.out.println("=====================");
-                            System.out.println("ArrayList na main ===");
-                            for (int k = 0; k < status.size(); k++) {
-                                System.out.println("kills do jogador: " + status.get(k).kills);
-                                System.out.println("deaths do jogador: " + status.get(k).deaths);
-                                System.out.println("horas jogadas: " + status.get(k).horas_p_dia);
-                            }
-                        }
+                    System.out.println("=====================");
+                    System.out.println("ArrayList na main ===");
+                    for (int k = 0; k < status_jog.size(); k++) {
+                        System.out.println("kills do jogador: " + status_jog.get(k).kills);
+                        System.out.println("deaths do jogador: " + status_jog.get(k).deaths);
+                        System.out.println("horas jogadas: " + status_jog.get(k).horas_p_dia);
                     }
                     break;
 
