@@ -37,7 +37,7 @@ public class CampeonatoDAO extends ConnectionDAO{
 
     public boolean atualizarCampeonato(int id, Campeonato campeonato) {
         connectToDB();
-        String sql = "UPDATE campeonato SET premiacao=?, times_inscritos=?, data=?  where id=?";
+        String sql = "UPDATE campeonato SET premiacao=?, times_inscritos=?, data=?  where idCampeonato=?";
 
         try {
             pst = con.prepareStatement(sql);
@@ -64,7 +64,7 @@ public class CampeonatoDAO extends ConnectionDAO{
 
     public boolean deletarCampeonato(int id) {
         connectToDB();
-        String sql = "DELETE FROM campeonato where id=?";
+        String sql = "DELETE FROM campeonato where idCampeonato=?";
 
         try {
             pst = con.prepareStatement(sql);
